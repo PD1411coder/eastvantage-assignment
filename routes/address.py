@@ -60,5 +60,11 @@ async def get_address_range(lat1, lng1, distance):
         d = getDistance(lat1, lng1, address["lat"], address["lng"])
         if d <= distance:
             print(d, "km")
-            arr.append(d)
+            print(address)
+            arr.append({ "city": address["city"],
+                        "state": address["state"],
+                        "zip": address["zip"],
+                        "lat": address["lat"],
+                        "lng": address["lng"]})
+
     return arr
