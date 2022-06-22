@@ -52,13 +52,13 @@ async def get_address_range(lat1, lng1, distance):
     if lat1 < -90 or lat1 > 90:
         return {"error": "Latitude must be between -90 and 90"}
     if lng1 < -180 or lng1 > 180:
-        return {"error": "Longitude must be between -180 and 180"}
-    
+        return {"error": "Longitude must be between -180 and 180"}  
     if distance < 0:
         return {"error": "Distance must be greater than 0"}
-    
-    
-    for address in conn.local.address.find():
-        if getDistance(lat1, lng1, address["lat"], address["lng"]) <= distance:
-            print(addressEntity(address))
-            return addressEntity(address)
+    arr = []
+    for address in conn.local.address.find({}):
+        d = getDistance(lat1, lng1, address["lat"], address["lng"])
+        if d <= distance:
+            print(d, "km")
+            arr.append(d)
+    return arr
